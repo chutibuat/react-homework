@@ -51,7 +51,7 @@ var Home = React.createClass({
     	<div>
     	<h1>{this.props.route.header}</h1>
     		<div className="form-group col-sm-4 col-sm-offset-4">
-    		<Link to="create">
+    		<Link to="create" className="hidden">
           <button type="submit" className="btn btn-success" style={ styles.marginbutton }>Create</button>
         </Link>
     		
