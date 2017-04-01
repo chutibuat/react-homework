@@ -11,6 +11,12 @@ var Create = React.createClass({
         
           <form className="form-horizontal">
             <div className="form-group">
+              <label htmlFor="file" className="col-sm-2 col-sm-offset-2 control-label">Avatar</label>
+              <div className="col-sm-6">
+                <input type="file" className="form-control" id="file" placeholder=""/>
+              </div>
+            </div>
+            <div className="form-group">
               <label htmlFor="firstName" className="col-sm-2 col-sm-offset-2 control-label">Firstname</label>
               <div className="col-sm-6">
                 <input type="text" className="form-control" id="firstName" placeholder="Firstname"/>
@@ -34,12 +40,7 @@ var Create = React.createClass({
                 <input type="number" className="form-control" id="mobilePhone" placeholder=""/>
               </div>
             </div>
-            <div className="form-group">
-              <label htmlFor="file" className="col-sm-2 col-sm-offset-2 control-label">Avatar</label>
-              <div className="col-sm-6">
-                <input type="file" className="form-control" id="file" placeholder=""/>
-              </div>
-            </div>
+            
             <div className="form-group">
               <div className="col-sm-10 text-right">
                 <Link to="/">

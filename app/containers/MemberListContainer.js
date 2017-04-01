@@ -66,16 +66,18 @@ var Home = React.createClass({
     		<Link to="create" className="hidden">
           <button type="submit" className="btn btn-success" style={ styles.marginbutton }>Create</button>
         </Link>
-    		
-         
         </div>
         <table className="table table-striped">
-        	<tr>
-        		<th>#</th>
-        		<th>Firstname Lastname</th>
-        		<th>#</th>
-        	</tr>
-        	{this.renderRows()}
+        	<thead>
+        		<tr>
+	        		<th>#</th>
+	        		<th>Firstname Lastname</th>
+	        		<th>#</th>
+	        	</tr>
+        	</thead>
+        	<tbody>
+        		{this.renderRows()}
+        	</tbody>
         </table>
 	    	{/*<BootstrapTable data={ products } insertRow={ true } deleteRow={ true } selectRow={ selectRowProp } options={ options }>
           <TableHeaderColumn width='500' dataField='id' isKey>Product ID</TableHeaderColumn>
