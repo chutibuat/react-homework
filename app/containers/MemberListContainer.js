@@ -35,7 +35,6 @@ function onClickRow (e) {
   return window.location = 'update'
 }
 
-
 var Home = React.createClass({
 	renderRows:function(){
 		return _.map(products, function(product,key){
