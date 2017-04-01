@@ -8,8 +8,8 @@ const products = {
   id: 1,
   firstName: "Peter",
   lastName : "C",
-  email : "test@gmail.com",
-  phone : "0811111111",
+  inputEmail : "test@gmail.com",
+  mobilePhone : "0811111111",
 };
 
 var ManageContainer = React.createClass({
@@ -20,12 +20,16 @@ var ManageContainer = React.createClass({
     onChange: React.PropTypes.func
   },
   getInitialState(){
-    return{
-      firstName:"",
-      lastName:"",
-      mobilePhone:"",
-      inputEmail:"",
-      avatarUrl:""
+    if(this.props.route.header === "Create User"){
+      return{
+        firstName:"",
+        lastName:"",
+        mobilePhone:"",
+        inputEmail:"",
+        avatarUrl:""
+      }
+    }else{
+      return products
     }
   },
   onChange(e) {
