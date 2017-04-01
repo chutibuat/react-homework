@@ -31,26 +31,16 @@ const products = [
   }
  ];
 
-
-function onAfterDeleteRow(rowKeys) {
-  alert('The rowkey you drop: ' + rowKeys);
+function onClickRow (e) {
+  return window.location = 'update'
 }
-
-const options = {
-  afterDeleteRow: onAfterDeleteRow  // A hook for after droping rows.
-};
-
-// If you want to enable deleteRow, you must enable row selection also.
-const selectRowProp = {
-  mode: 'checkbox'
-};
 
 
 var Home = React.createClass({
 	renderRows:function(){
 		return _.map(products, function(product,key){
 			return(
-				<tr key={key}>
+				<tr key={key} onClick={onClickRow}>
       		<td>{product.id}</td>
       		<td>{product.firstName} {product.lastName}</td>
       		<td> x x</td>
@@ -71,7 +61,7 @@ var Home = React.createClass({
         	<thead>
         		<tr>
 	        		<th>#</th>
-	        		<th>Firstname Lastname</th>
+	        		<th>Firstname Lastnames</th>
 	        		<th>#</th>
 	        	</tr>
         	</thead>
