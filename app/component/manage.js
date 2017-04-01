@@ -20,7 +20,7 @@ var Manage = React.createClass({
           <div className="form-group">
             <label htmlFor="file" className="col-sm-2 col-sm-offset-2 control-label">Avatar</label>
             <div className="col-sm-6">
-              <input type="file" name="avatarUrl" className="form-control" id="file" placeholder=""/>
+              <input type="file" name="avatarUrl" className="form-control" id="file" placeholder="" onChange={this.props.onChange}/>
             </div>
           </div>
           <div className="form-group">
@@ -32,19 +32,19 @@ var Manage = React.createClass({
           <div className="form-group">
             <label htmlFor="lastName" className="col-sm-2 col-sm-offset-2 control-label">Lasttname</label>
             <div className="col-sm-6">
-              <input type="text" name="lastName" className="form-control" id="lastName" placeholder="Lasttname" value={this.props.products.lastName}/>
+              <input type="text" name="lastName" className="form-control" id="lastName" placeholder="Lasttname" value={this.props.products.lastName} onChange={this.props.onChange}/>
             </div>
           </div>
           <div className="form-group">
             <label htmlFor="inputEmail" className="col-sm-2 col-sm-offset-2 control-label">Email</label>
             <div className="col-sm-6">
-              <input type="email" name="inputEmail" className="form-control" id="inputEmail" placeholder="Email" value={this.props.products.email}/>
+              <input type="email" name="inputEmail" className="form-control" id="inputEmail" placeholder="Email" value={this.props.products.email} onChange={this.props.onChange}/>
             </div>
           </div>
           <div className="form-group">
             <label htmlFor="mobilePhone" className="col-sm-2 col-sm-offset-2 control-label">Mobile</label>
             <div className="col-sm-6">
-              <input type="number" name="mobilePhone" className="form-control" id="mobilePhone" placeholder="" value={this.props.products.phone}/>
+              <input type="number" name="mobilePhone" className="form-control" id="mobilePhone" placeholder="" value={this.props.products.phone} onChange={this.props.onChange}/>
             </div>
           </div>
           
