@@ -19,6 +19,11 @@ var ManageContainer = React.createClass({
     }),
     onChange: React.PropTypes.func
   },
+  getInitialState(){
+    return{
+      
+    }
+  },
   render: function () {
     return (
       <Manage route={this.props.route} products={products}/>
