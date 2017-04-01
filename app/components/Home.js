@@ -2,31 +2,32 @@ var React = require('react');
 var ReactRouter = require('react-router');
 var styles = require('../styles');
 var ReactBsTable  = require('react-bootstrap-table')
+var _  = require('lodash')
 var BootstrapTable = ReactBsTable.BootstrapTable;
 var TableHeaderColumn = ReactBsTable.TableHeaderColumn;;
 var Link = ReactRouter.Link
 
 const products = [
 	{
-      id: 1,
-      name: "Product1",
-      price: 120
+    id: 1,
+    firstName: "Peter",
+    lastName : "C",
   }, {
-      id: 2,
-      name: "Product2",
-      price: 80
+    id: 2,
+    firstName: "James",
+    lastName : "C"
   }, {
-      id: 3,
-      name: "Product2",
-      price: 80
+    id: 3,
+    firstName: "Gram",
+    lastName : "C"
   }, {
-      id: 4,
-      name: "Product2",
-      price: 80
+    id: 4,
+    firstName: "Sand",
+    lastName : "C"
   }, {
-      id: 5,
-      name: "Product2",
-      price: 80
+    id: 5,
+    firstName: "John",
+    lastName : "C"
   }
  ];
 
@@ -46,6 +47,17 @@ const selectRowProp = {
 
 
 var Home = React.createClass({
+	renderRows:function(){
+		return _.map(products, function(product,key){
+			return(
+				<tr key={key}>
+      		<td>{product.id}</td>
+      		<td>{product.firstName} {product.lastName}</td>
+      		<td> x x</td>
+      	</tr>
+			)
+		})
+	},
   render: function () {
     return (
     	<div>
@@ -57,11 +69,19 @@ var Home = React.createClass({
     		
          
         </div>
-	    	<BootstrapTable data={ products } insertRow={ true } deleteRow={ true } selectRow={ selectRowProp } options={ options }>
+        <table className="table table-striped">
+        	<tr>
+        		<th>#</th>
+        		<th>Firstname Lastname</th>
+        		<th>#</th>
+        	</tr>
+        	{this.renderRows()}
+        </table>
+	    	{/*<BootstrapTable data={ products } insertRow={ true } deleteRow={ true } selectRow={ selectRowProp } options={ options }>
           <TableHeaderColumn width='500' dataField='id' isKey>Product ID</TableHeaderColumn>
           <TableHeaderColumn width='600' dataField='name'>Product Name</TableHeaderColumn>
           <TableHeaderColumn dataField='price'>Product Price</TableHeaderColumn>
-      	</BootstrapTable>
+      	</BootstrapTable>*/}
 
 	    	
 			</div>
