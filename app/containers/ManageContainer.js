@@ -2,15 +2,10 @@ var React = require('react');
 var styles = require('../styles');
 var ReactRouter = require('react-router');
 var Manage = require('../component/manage');
+// var rp = require('request-promise');
+const request = require('axios')
 var Link = ReactRouter.Link
 
-const products = {
-  id: 1,
-  firstName: "Peter",
-  lastName : "C",
-  inputEmail : "test@gmail.com",
-  mobilePhone : "0811111111",
-};
 
 var ManageContainer = React.createClass({
   propTypes:{
@@ -20,17 +15,29 @@ var ManageContainer = React.createClass({
     onChange: React.PropTypes.func
   },
   getInitialState(){
-    if(this.props.route.header === "Create User"){
-      return{
-        firstName:"",
-        lastName:"",
-        mobilePhone:"",
-        inputEmail:"",
-        avatarUrl:""
-      }
-    }else{
-      return products
+    return{
+      firstName:"",
+      lastName:"",
+      mobilePhone:"",
+      inputEmail:"",
+      avatarUrl:""
     }
+  },
+  componentDidMount(){
+    var users
+    request.get('http://demo4925167.mockable.io/users')
+    .then((response) => {
+      const result = response.data[0]
+      this.setState({
+        firstName: result.firstName,
+        lastName : result.lastName,
+        mobilePhone:result.mobilePhone,
+        inputEmail:result.inputEmail
+      })
+    })
+    .catch((err) => {
+      console.log(err)
+    });
   },
   onChange(e) {
     const name = e.target.name
@@ -38,10 +45,10 @@ var ManageContainer = React.createClass({
     this.setState({[name]:value})
   },
   render: function () {
+    // console.log(this.state)
     return (
       <Manage 
         route={this.props.route} 
-        products={products} 
         onChange={this.onChange} 
         firstName={this.state.firstName}
         lastName={this.state.lastName}
