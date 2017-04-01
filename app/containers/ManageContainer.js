@@ -29,11 +29,22 @@ var ManageContainer = React.createClass({
     }
   },
   onChange(e) {
-    console.log(e.target.name)
+    const name = e.target.name
+    const value = e.target.value
+    this.setState({[name]:value})
   },
   render: function () {
     return (
-      <Manage route={this.props.route} products={products} onChange={this.onChange}/>
+      <Manage 
+        route={this.props.route} 
+        products={products} 
+        onChange={this.onChange} 
+        firstName={this.state.firstName}
+        lastName={this.state.lastName}
+        mobilePhone={this.state.mobilePhone}
+        inputEmail={this.state.inputEmail}
+        avatarUrl={this.state.avatarUrl}
+      />
     )
   }
 });
