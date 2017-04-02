@@ -20,24 +20,32 @@ var ManageContainer = React.createClass({
       lastName:"",
       mobilePhone:"",
       inputEmail:"",
-      avatarUrl:""
+      avatarUrl:"https://dummyimage.com/100x100"
     }
   },
   componentDidMount(){
     var users
-    request.get('http://demo4925167.mockable.io/users')
-    .then((response) => {
-      const result = response.data[0]
-      this.setState({
-        firstName: result.firstName,
-        lastName : result.lastName,
-        mobilePhone:result.mobilePhone,
-        inputEmail:result.inputEmail
+    if(this.props.route.header !== "Create User"){
+      request.get('http://demo4925167.mockable.io/users')
+      .then((response) => {
+        const result = response.data[0]
+        var avatarUrl 
+        if(!result.avatarUrl){
+          avatarUrl = "https://dummyimage.com/100x100"
+        }
+        this.setState({
+          firstName: result.firstName,
+          lastName : result.lastName,
+          mobilePhone:result.mobilePhone,
+          inputEmail:result.inputEmail,
+          avatarUrl:avatarUrl
+        })
       })
-    })
-    .catch((err) => {
-      console.log(err)
-    });
+      .catch((err) => {
+        console.log(err)
+      });
+    }
+    
   },
   onChange(e) {
     const name = e.target.name

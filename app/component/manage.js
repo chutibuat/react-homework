@@ -17,10 +17,15 @@ var Manage = React.createClass({
         <div className="clearfix"></div>
       
         <form className="form-horizontal">
+        	<div className="form-group">
+            <div className="col-sm-12">
+            	<img className="img-profile center-block"  src={this.props.avatarUrl} alt=""/>
+            </div>
+          </div>
           <div className="form-group">
             <label htmlFor="file" className="col-sm-2 col-sm-offset-2 control-label">Avatar</label>
             <div className="col-sm-6">
-              <input type="file" name="avatarUrl"  className="form-control" id="file" placeholder="" value={this.props.avatarUrl} onChange={this.props.onChange}/>
+              <input type="file" name="avatarUrl"  className="form-control" id="file" placeholder="" onChange={this.props.onChange}/>
             </div>
           </div>
           <div className="form-group">

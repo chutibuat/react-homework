@@ -18,13 +18,18 @@ function onDelete(){
     console.log('g')
   }
 }
+function chkImg(avatarUrl){
+  var avatarUrl
+  if(!avatarUrl) avatarUrl = "https://dummyimage.com/50x50"
+  return avatarUrl;
+} 
 
 var MemberList = React.createClass({
 	renderRows:function(){
 		return _.map(this.props.membersList, function(user,key){
 			return(
 				<tr key={key} >
-      		<td><img src={user.avatarUrl} alt="" className="img-profile-MemberList"/></td>
+      		<td><img src={chkImg(user.avatarUrl)} className="img-profile-MemberList"/></td>
       		<td className="td-link" onClick={(e) => onClickRow(e, user.id)}>{user.firstName} {user.lastName}</td>
       		<td className="text-center">
             <button className="btn btn-danger" onClick={onDelete}>
