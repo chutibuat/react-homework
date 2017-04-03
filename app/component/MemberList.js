@@ -28,9 +28,9 @@ var MemberList = React.createClass({
 	renderRows:function(){
 		return _.map(this.props.membersList, function(user,key){
 			return(
-				<tr key={key} >
+				<tr key={user._id} >
       		<td><img src={chkImg(user.avatarUrl)} className="img-profile-MemberList"/></td>
-      		<td className="td-link" onClick={(e) => onClickRow(e, user.id)}>{user.firstName} {user.lastName}</td>
+      		<td className="td-link" onClick={(e) => onClickRow(e, user._id)}>{user.firstname} {user.lastname}</td>
       		<td className="text-center">
             <button className="btn btn-danger" onClick={onDelete}>
               <i className="fa fa-trash" aria-hidden="true"></i>
