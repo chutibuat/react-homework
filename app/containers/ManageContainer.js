@@ -27,20 +27,22 @@ var ManageContainer = React.createClass({
   componentDidMount(){
     var users
     if(this.props.route.header !== "Create User"){
-      request.get('http://demo4925167.mockable.io/users')
+      var userId = this.props.location.query.id
+      // request.get('http://demo4925167.mockable.io/users')
+      request.get('http://localhost:3000/v1/user/' + userId)
       .then((response) => {
-        var userId = this.props.location.query.id
-        const result = response.data[userId -1]
+        // const result = response.data[userId -1]
+        const result = response.data[0]
         var avatarUrl = result.avatarUrl
 
         if(!result.avatarUrl){
           avatarUrl = "https://dummyimage.com/100x100"
         }
         this.setState({
-          firstName: result.firstName,
-          lastName : result.lastName,
-          mobilePhone:result.mobilePhone,
-          inputEmail:result.inputEmail,
+          firstName: result.firstname,
+          lastName : result.lastname,
+          mobilePhone:result.mobile,
+          inputEmail:result.email,
           avatarUrl:avatarUrl,
           pageType:"update"
         })
