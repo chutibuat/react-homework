@@ -8,17 +8,17 @@ const user = {
 
 	create: (req, res, next) => {
 	  'yeah this create method'
-	}
+	},
 
 	show: (req, res, next) => {
 	  User.find({
 	  	_id: req.params.userId
 	  }).lean().exec((err, users) => res.json(users));
-	}
+	},
 
 	update: (req, res, next) => {
 	  'yeah this update method'
-	}
+	},
 
 	delete: (req, res, next) => {
 	  'yeah this delete method'

@@ -22,7 +22,8 @@ var MemberListContainer = React.createClass({
   },
   componentDidMount(){
     var users
-    request.get('http://demo4925167.mockable.io/users')
+    // request.get('http://demo4925167.mockable.io/users')
+    request.get('http://localhost:3000/v1/users')
     .then((response) => {
       const result = response.data
       this.setState({
