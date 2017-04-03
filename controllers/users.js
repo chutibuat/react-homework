@@ -7,7 +7,19 @@ const user = {
 	},
 
 	create: (req, res, next) => {
-	  console.log(req)
+		User.bulkWrite([{
+	    insertOne: {
+	      document: {
+	        firstname: req.body.firstname,
+		      lastname: req.body.lastname,
+		      avatar: '',
+		      email: req.body.email,
+		      mobile: req.body.mobile
+	      }
+	    }
+	  }]);
+
+		res.send('created')
 	},
 
 	show: (req, res, next) => {
@@ -18,20 +30,25 @@ const user = {
 
 	update: (req, res, next) => {
 	  User.update(
-		   { _id: req.params.userId },
-		   {
-		      firstname: "testname",
+		  { _id: req.params.userId },
+		  {
+		  	$set: {
+		  		firstname: "testname",
 		      lastname: 'testlast',
 		      avatar: '',
-		      email: 'aaa@bbb.ccc',
+		      email: 'test@test.test',
 		      mobile: '1234567890'
-		   },
-		   { upsert: true }
-		)
+		  	}
+		  }
+		).exec()
+
+		res.send('updated')
 	},
 
 	delete: (req, res, next) => {
-	  'yeah this delete method'
+		User.deleteOne({ _id: req.params.userId }).exec()
+
+		res.send('deleted')
 	}
 } 
 
