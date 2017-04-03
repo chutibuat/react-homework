@@ -17,7 +17,17 @@ const user = {
 	},
 
 	update: (req, res, next) => {
-	  'yeah this update method'
+	  User.update(
+		   { _id: req.params.userId },
+		   {
+		      firstname: "testname",
+		      lastname: 'testlast',
+		      avatar: '',
+		      email: 'aaa@bbb.ccc',
+		      mobile: '1234567890'
+		   },
+		   { upsert: true }
+		)
 	},
 
 	delete: (req, res, next) => {
