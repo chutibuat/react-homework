@@ -15,16 +15,55 @@ var Manage = React.createClass({
     }),
     onChange: React.PropTypes.func
   },
-  
-  handleAddPost: function () {
-	  
-	},
+  getInitialState: function () {
+    return {loading: false, errors: {}}
+  },
+  _create: function () {
+    
+    return $.ajax({
+      url: 'localhost:3030',
+      type: 'POST',
+      data: {
+        firstName: this.state.firstName,
+        lastName: this.state.lastName,
+        email: this.state.email,
+        mobile:this.state.mobile
+      },
+      beforeSend: function () {
+
+        this.setState({loading: true});
+      }.bind(this)
+
+    })
+  },
+  _onSubmit: function (e) {
+    e.preventDefault();
+    var xhr = this._create();
+    xhr.done(this._onSuccess)
+    .fail(this._onError)
+    .always(this.hideLoading)
+  },
+  hideLoading: function () {
+    this.setState({loading: false});
+  },
+  _onSuccess: function (data) {
+    this.refs.user_form.getDOMNode().reset();
+    this.setState(this.getInitialState());
+    // show success message
+  },
+  _validate: function () {
+    var errors = {}
+    if(this.state.firstName == "") {
+      errors.firstName = "Username is required";
+    }
+    return errors;
+  },
 	render:function() {
 		return(
 			<div>
         <h1>{this.props.route.header}</h1>
         <div className="clearfix"></div>
-        <form className="form-horizontal" onSubmit={this.handleAddPost} method="POST">
+        <form className="form-horizontal" onSubmit={this._onSubmit} method="POST">
           <input type="hidden" name="pageType" id="file" defaultValue={this.props.pageType}/>
           <input type="hidden" name="id" id="id" defaultValue={this.props.userId}/>
         	<div className="form-group">
@@ -68,7 +107,10 @@ var Manage = React.createClass({
               <Link to="/">
                 <button className="btn btn-default" style={ styles.marginbutton }>Cancel</button>
               </Link>
-              <button type="submit" className="btn btn-success" style={ styles.marginbutton }>Submit</button>
+              <button type="submit" className="btn btn-default" disabled={this.state.loading}>
+		            Create
+		          </button>
+              {/*<button type="submit" className="btn btn-success" style={ styles.marginbutton }>Submit</button>*/}
             </div>
           </div>
         </form>
@@ -78,3 +120,7 @@ var Manage = React.createClass({
 })
 
 module.exports = Manage
+
+
+
+
