@@ -3,6 +3,11 @@ var styles = require('../styles');
 var ReactRouter = require('react-router');
 var Link = ReactRouter.Link
 
+function aaa(){
+	
+}
+
+
 var Manage = React.createClass({
 	propTypes:{
     route: React.PropTypes.shape({
@@ -10,17 +15,27 @@ var Manage = React.createClass({
     }),
     onChange: React.PropTypes.func
   },
+  
+  handleAddPost: function () {
+	  
+	},
 	render:function() {
 		return(
 			<div>
         <h1>{this.props.route.header}</h1>
         <div className="clearfix"></div>
-      
-        <form className="form-horizontal">
+        <form className="form-horizontal" onSubmit={this.handleAddPost} method="POST">
+          <input type="hidden" name="pageType" id="file" defaultValue={this.props.pageType}/>
+          <input type="hidden" name="id" id="id" defaultValue={this.props.userId}/>
+        	<div className="form-group">
+            <div className="col-sm-12">
+            	<img className="img-profile center-block"  src={this.props.avatarUrl} alt=""/>
+            </div>
+          </div>
           <div className="form-group">
             <label htmlFor="file" className="col-sm-2 col-sm-offset-2 control-label">Avatar</label>
             <div className="col-sm-6">
-              <input type="file" name="avatarUrl"  className="form-control" id="file" placeholder="" value={this.props.avatarUrl} onChange={this.props.onChange}/>
+              <input type="file" name="avatarUrl"  className="form-control" id="file" placeholder="" onChange={this.props.onChange}/>
             </div>
           </div>
           <div className="form-group">
@@ -51,7 +66,7 @@ var Manage = React.createClass({
           <div className="form-group">
             <div className="col-sm-10 text-right">
               <Link to="/">
-                <button type="submit" className="btn btn-default" style={ styles.marginbutton }>Cancel</button>
+                <button className="btn btn-default" style={ styles.marginbutton }>Cancel</button>
               </Link>
               <button type="submit" className="btn btn-success" style={ styles.marginbutton }>Submit</button>
             </div>

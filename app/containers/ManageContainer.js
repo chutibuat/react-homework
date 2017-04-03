@@ -20,24 +20,36 @@ var ManageContainer = React.createClass({
       lastName:"",
       mobilePhone:"",
       inputEmail:"",
-      avatarUrl:""
+      avatarUrl:"https://dummyimage.com/100x100",
+      pageType:"create"
     }
   },
   componentDidMount(){
     var users
-    request.get('http://demo4925167.mockable.io/users')
-    .then((response) => {
-      const result = response.data[0]
-      this.setState({
-        firstName: result.firstName,
-        lastName : result.lastName,
-        mobilePhone:result.mobilePhone,
-        inputEmail:result.inputEmail
+    if(this.props.route.header !== "Create User"){
+      request.get('http://demo4925167.mockable.io/users')
+      .then((response) => {
+        var userId = this.props.location.query.id
+        const result = response.data[userId -1]
+        var avatarUrl = result.avatarUrl
+
+        if(!result.avatarUrl){
+          avatarUrl = "https://dummyimage.com/100x100"
+        }
+        this.setState({
+          firstName: result.firstName,
+          lastName : result.lastName,
+          mobilePhone:result.mobilePhone,
+          inputEmail:result.inputEmail,
+          avatarUrl:avatarUrl,
+          pageType:"update"
+        })
       })
-    })
-    .catch((err) => {
-      console.log(err)
-    });
+      .catch((err) => {
+        console.log(err)
+      });
+    }
+    
   },
   onChange(e) {
     const name = e.target.name
@@ -45,7 +57,6 @@ var ManageContainer = React.createClass({
     this.setState({[name]:value})
   },
   render: function () {
-    // console.log(this.state)
     return (
       <Manage 
         route={this.props.route} 
@@ -55,6 +66,8 @@ var ManageContainer = React.createClass({
         mobilePhone={this.state.mobilePhone}
         inputEmail={this.state.inputEmail}
         avatarUrl={this.state.avatarUrl}
+        userId ={this.props.location.query.id}
+        pageType ={this.state.pageType}
       />
     )
   }
