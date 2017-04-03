@@ -11,6 +11,14 @@ const app = express();
 
 // Logger that outputs all requests into the console
 app.use(morgan('combined'));
+
+// Allowed CORS
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
 // Use v1 as prefix for all API endpoints
 app.use('/v1', router);
 
