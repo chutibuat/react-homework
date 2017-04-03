@@ -7,7 +7,7 @@ const user = {
 	},
 
 	create: (req, res, next) => {
-	  'yeah this create method'
+	  console.log(req)
 	},
 
 	show: (req, res, next) => {

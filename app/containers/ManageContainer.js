@@ -76,7 +76,3 @@ var ManageContainer = React.createClass({
 });
 
 module.exports = ManageContainer;
-
-
-
-
