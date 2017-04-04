@@ -13,30 +13,29 @@ var Manage = React.createClass({
   },
   _onSubmit: function (e) {
     e.preventDefault()
-    // For Create
-    request.post('http://localhost:3000/v1/user/create', {
-      firstname: this.props.firstName,
-      lastname: this.props.lastName,
-      email: this.props.inputEmail,
-      mobile: this.props.mobilePhone
-    })
-
-    // For Update
-    // request.put('http://localhost:3000/v1/user/' + this.props.userId, {
-    //   firstname: this.props.firstName,
-    //   lastname: this.props.lastName,
-    //   email: this.props.inputEmail,
-    //   mobile: this.props.mobilePhone
-    // })
-
-    // For Delete
-    // request.delete('http://localhost:3000/v1/user/' + this.props.userId)
-
-    .then(function(response){
-      if (response.status == 200) {
-        return window.location = '/'
-      }
-    });
+    if(this.props.pageType === "create"){
+      request.post('http://localhost:3000/v1/user/create', {
+        firstname: this.props.firstName,
+        lastname: this.props.lastName,
+        email: this.props.inputEmail,
+        mobile: this.props.mobilePhone
+      }).then(function(response){
+        if (response.status == 200) {
+          return window.location = '/'
+        }
+      });
+    }else{
+      request.put('http://localhost:3000/v1/user/' + this.props.userId, {
+        firstname: this.props.firstName,
+        lastname: this.props.lastName,
+        email: this.props.inputEmail,
+        mobile: this.props.mobilePhone
+      }).then(function(response){
+        if (response.status == 200) {
+          return window.location = '/'
+        }
+      });
+    }
   },
   render:function() {
     return(

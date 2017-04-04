@@ -5,15 +5,21 @@ var ReactBsTable  = require('react-bootstrap-table')
 var _  = require('lodash')
 var BootstrapTable = ReactBsTable.BootstrapTable;
 var TableHeaderColumn = ReactBsTable.TableHeaderColumn;;
-var Link = ReactRouter.Link
+var Link = ReactRouter.Link;
+const request = require('axios')
 
 function onClickRow (e,id) {
   return window.location = 'update?id='+id;
 }
-function onDelete(){
+function onDelete(e,userId){
   var r = confirm("Confirm to Delete");
   if (r == true) {
-    console.log('s')
+    request.delete('http://localhost:3000/v1/user/' + userId)
+    .then(function(response){
+      if (response.status == 200) {
+        return window.location = '/'
+      }
+    });
   } else {
     console.log('g')
   }
@@ -32,7 +38,7 @@ var MemberList = React.createClass({
       		<td><img src={chkImg(user.avatarUrl)} className="img-profile-MemberList"/></td>
       		<td className="td-link" onClick={(e) => onClickRow(e, user._id)}>{user.firstname} {user.lastname}</td>
       		<td className="text-center">
-            <button className="btn btn-danger" onClick={onDelete}>
+            <button className="btn btn-danger" onClick={(e) => onDelete(e, user._id)}>
               <i className="fa fa-trash" aria-hidden="true"></i>
             </button>
           </td>
