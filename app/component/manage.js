@@ -11,6 +11,7 @@ var Manage = React.createClass({
     }),
     onChange: React.PropTypes.func
   },
+ 
   _onSubmit: function (e) {
     e.preventDefault()
     if(this.props.pageType === "create"){
@@ -37,12 +38,18 @@ var Manage = React.createClass({
       });
     }
   },
+  _handleKeyPress: function(e) {
+    if (e.key === 'Enter') {
+      e.preventDefault()
+      this._onSubmit(e)
+    }
+  },
   render:function() {
     return(
       <div>
         <h1>{this.props.route.header}</h1>
         <div className="clearfix"></div>
-        <form className="form-horizontal" onSubmit={this._onSubmit} method="POST">
+        <form className="form-horizontal" onSubmit={this._onSubmit} method="POST" onKeyPress={this._handleKeyPress} >
           <input type="hidden" name="pageType" id="file" defaultValue={this.props.pageType}/>
           <input type="hidden" name="id" id="id" defaultValue={this.props.userId}/>
           <div className="form-group">
