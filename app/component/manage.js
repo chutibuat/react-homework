@@ -1,9 +1,8 @@
 var React = require('react');
 var styles = require('../styles');
 var ReactRouter = require('react-router');
-var Link = ReactRouter.Link
-
 const request = require('axios')
+var Link = ReactRouter.Link
 
 var Manage = React.createClass({
   propTypes:{
@@ -12,44 +11,32 @@ var Manage = React.createClass({
     }),
     onChange: React.PropTypes.func
   },
-  _create: function () {  
-    // console.log(this.props)
-    // return $.ajax({
-    //   url: 'http://localhost:3000/v1/user/create',
-    //   type: 'POST',
-    //   data: {
-    //     firstname: this.props.firstName,
-    //     lastname: this.props.lastName,
-    //     email: this.props.inputEmail,
-    //     mobile: this.props.mobilePhone
-    //   },
-    //   beforeSend: function () {
-    //     this.setState({loading: true});
-    //   }.bind(this)
-    // })
-  },
-  // _onSuccess: function (data) {
-  //   console.log('_onSuccess');
-  //   // console.log(data)
-  //   this.refs.user_form.getDOMNode().reset();
-  //   this.setState(this.getInitialState());
-  //   // show success message
-  // },
   _onSubmit: function (e) {
-    // request.post('http://localhost:3000/v1/user/create', { 
-    //   firstName: 'Marlon', lastName: 'Bernardes' 
+    e.preventDefault()
+    // For Create
+    request.post('http://localhost:3000/v1/user/create', {
+      firstname: this.props.firstName,
+      lastname: this.props.lastName,
+      email: this.props.inputEmail,
+      mobile: this.props.mobilePhone
+    })
+
+    // For Update
+    // request.put('http://localhost:3000/v1/user/' + this.props.userId, {
+    //   firstname: this.props.firstName,
+    //   lastname: this.props.lastName,
+    //   email: this.props.inputEmail,
+    //   mobile: this.props.mobilePhone
     // })
-    // .then(function(response){
-    //   console.log('saved successfully')
-    // });
-    return window.location = '/'
-    // e.preventDefault();    
-    // var xhr = this._create();
-    // console.log('_onSubmit');
-    // console.log(xhr);
-    // xhr.done(this._onSuccess)
-    // .fail(this._onError)
-    // .always(this.hideLoading)
+
+    // For Delete
+    // request.delete('http://localhost:3000/v1/user/' + this.props.userId)
+
+    .then(function(response){
+      if (response.status == 200) {
+        return window.location = '/'
+      }
+    });
   },
   render:function() {
     return(
