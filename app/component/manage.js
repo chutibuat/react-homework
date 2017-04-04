@@ -11,39 +11,45 @@ var Manage = React.createClass({
     }),
     onChange: React.PropTypes.func
   },
+ 
   _onSubmit: function (e) {
     e.preventDefault()
-    // For Create
-    request.post('http://localhost:3000/v1/user/create', {
-      firstname: this.props.firstName,
-      lastname: this.props.lastName,
-      email: this.props.inputEmail,
-      mobile: this.props.mobilePhone
-    })
-
-    // For Update
-    // request.put('http://localhost:3000/v1/user/' + this.props.userId, {
-    //   firstname: this.props.firstName,
-    //   lastname: this.props.lastName,
-    //   email: this.props.inputEmail,
-    //   mobile: this.props.mobilePhone
-    // })
-
-    // For Delete
-    // request.delete('http://localhost:3000/v1/user/' + this.props.userId)
-
-    .then(function(response){
-      if (response.status == 200) {
-        return window.location = '/'
-      }
-    });
+    if(this.props.pageType === "create"){
+      request.post('http://localhost:3000/v1/user/create', {
+        firstname: this.props.firstName,
+        lastname: this.props.lastName,
+        email: this.props.inputEmail,
+        mobile: this.props.mobilePhone
+      }).then(function(response){
+        if (response.status == 200) {
+          return window.location = '/'
+        }
+      });
+    }else{
+      request.put('http://localhost:3000/v1/user/' + this.props.userId, {
+        firstname: this.props.firstName,
+        lastname: this.props.lastName,
+        email: this.props.inputEmail,
+        mobile: this.props.mobilePhone
+      }).then(function(response){
+        if (response.status == 200) {
+          return window.location = '/'
+        }
+      });
+    }
+  },
+  _handleKeyPress: function(e) {
+    if (e.key === 'Enter') {
+      e.preventDefault()
+      this._onSubmit(e)
+    }
   },
   render:function() {
     return(
       <div>
         <h1>{this.props.route.header}</h1>
         <div className="clearfix"></div>
-        <form className="form-horizontal" onSubmit={this._onSubmit} method="POST">
+        <form className="form-horizontal" onSubmit={this._onSubmit} method="POST" onKeyPress={this._handleKeyPress} >
           <input type="hidden" name="pageType" id="file" defaultValue={this.props.pageType}/>
           <input type="hidden" name="id" id="id" defaultValue={this.props.userId}/>
           <div className="form-group">
