@@ -1,4 +1,4 @@
-# react-homework @Shopspot for FrontEnd dev.
+# react-homework for FrontEnd dev.
 
 How to setup
 - You must install & run mongodb
